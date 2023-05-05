@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class TestController {
 
-    @GetMapping("test1/index")
+    @GetMapping("index")
     public String index(HttpServletRequest request){
         String token =request.getParameter("token");
         System.out.println("token : "+token);
@@ -30,7 +30,7 @@ public class TestController {
         return "test1 index cas拦截正常,登录账号:"+username;
     }
 
-    @GetMapping("test1/index1")
+    @GetMapping("index1")
     public String index1(HttpServletRequest request){
         String token =request.getParameter("token");
         System.out.println("token : "+token);
@@ -47,7 +47,7 @@ public class TestController {
      * @param request
      * @return
      */
-    @GetMapping("test1/index2")
+    @GetMapping("index2")
     public String index2(HttpServletRequest request){
 //        String token =request.getParameter("token");
 //        System.out.println("token : "+token);
