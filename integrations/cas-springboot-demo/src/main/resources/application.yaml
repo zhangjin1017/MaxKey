@@ -1,10 +1,10 @@
 server:
   port: 8989
 cas:
-  server-url-prefix: http://sso.maxkey.top:8527/maxkey/sign/authz/cas/
+  server-url-prefix: http://sso.maxkey.top:9527/sign/authz/cas/
   server-login-url: http://sso.maxkey.top:8527/maxkey/sign/authz/cas/login
-  client-host-url: http://127.0.0.1:8989/
-  validation-type: cas3
+  client-host-url: http://sso.maxkey.top:8989/
+  validation-type: cas
 #  拦截的URL地址
   authentication-url-patterns:
     - /index

@@ -18,6 +18,18 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class TestController {
 
+    @GetMapping("/")
+    public String test(HttpServletRequest request){
+        String token =request.getParameter("token");
+        System.out.println("token : "+token);
+        Assertion assertion = (Assertion) request.getSession().getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+
+        String username=     assertion.getPrincipal().getName();
+        System.out.println(username);
+
+        return "test cas拦截正常,登录账号:"+username;
+    }
+
     @GetMapping("index")
     public String index(HttpServletRequest request){
         String token =request.getParameter("token");
@@ -27,7 +39,7 @@ public class TestController {
         String username=     assertion.getPrincipal().getName();
         System.out.println(username);
 
-        return "test1 index cas拦截正常,登录账号:"+username;
+        return "index cas拦截正常,登录账号:"+username;
     }
 
     @GetMapping("index1")
@@ -39,7 +51,7 @@ public class TestController {
         String username=     assertion.getPrincipal().getName();
         System.out.println(username);
 
-        return "test index cas拦截正常,登录账号:"+username;
+        return "index1 cas拦截正常,登录账号:"+username;
     }
 
     /**

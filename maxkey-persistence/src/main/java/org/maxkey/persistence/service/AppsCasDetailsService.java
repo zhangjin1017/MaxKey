@@ -30,12 +30,12 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 @Repository
 public class AppsCasDetailsService  extends JpaBaseService<AppsCasDetails>{
 
-	protected final static  Cache<String, AppsCasDetails> detailsCache = 
+	protected final static  Cache<String, AppsCasDetails> detailsCache =
             Caffeine.newBuilder()
                 .expireAfterWrite(30, TimeUnit.MINUTES)
                 .maximumSize(200000)
                 .build();
-	
+
 	public AppsCasDetailsService() {
 		super(AppsCasDetailsMapper.class);
 	}
@@ -47,19 +47,22 @@ public class AppsCasDetailsService  extends JpaBaseService<AppsCasDetails>{
 	public AppsCasDetailsMapper getMapper() {
 		return (AppsCasDetailsMapper)super.getMapper();
 	}
-	
+
 	public  AppsCasDetails  getAppDetails(String id , boolean cached) {
 		AppsCasDetails details = null;
 		if(cached) {
 			details = detailsCache.getIfPresent(id);
+			System.out.println("detailsCache1 " + details);
 			if(details == null) {
 				details = getMapper().getAppDetails(id);
+				System.out.println("getAppDetails2 " + details);
 				if(details != null) {
 					detailsCache.put(id, details);
 				}
 			}
 		}else {
 			details = getMapper().getAppDetails(id);
+			System.out.println("getAppDetails3 " + details);
 		}
 		return details;
 	}
